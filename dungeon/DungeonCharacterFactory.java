@@ -20,6 +20,7 @@ public class DungeonCharacterFactory
 			case 1: return new Ogre();
 			case 2: return new Gremlin();
 			case 3: return new Skeleton();
+			case 4: return new Ghoul();
 			default: throw new IllegalArgumentException("choice is not valid");
 		}
 	}
