@@ -49,11 +49,7 @@ a polymorphic reference (Monster) to accomplish this task.
 ---------------------------------------------------------------------*/
 	private Monster generateMonster()
 	{
-<<<<<<< Updated upstream
 		int choice = (int)(Math.random() * 4) + 1;
-=======
-		int choice = (int)(Math.random() * 5) + 1;
->>>>>>> Stashed changes
       
       return DungeonCharacterFactory.createMonster(choice);
    }//end generateMonster method
