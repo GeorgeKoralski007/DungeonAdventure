@@ -9,6 +9,7 @@ public class DungeonCharacterFactory
 			case 2: return new Sorceress();
 			case 3: return new Thief();
 			case 4: return new King();
+			case 5: return new Druid();
 			default: throw new IllegalArgumentException("choice is not valid");
 		}
    }

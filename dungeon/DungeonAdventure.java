@@ -35,9 +35,10 @@ this task
    					          "1. Warrior\n" +
    					      	 "2. Sorceress\n" +
        	                   "3. Thief\n"+
-                            "4. King");
+                            "4. King\n" +
+       	                   "5. Druid");
 		   choice = Keyboard.readInt();
-      } while (choice < 1 || choice > 4);
+      } while (choice < 1 || choice > 5);
       
       return DungeonCharacterFactory.createHero(choice);
 
