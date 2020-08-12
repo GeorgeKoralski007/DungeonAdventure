@@ -65,6 +65,9 @@ public class King extends Hero
 			        break;
 			    case 2: specialSkill(opponent);
 			        break;
+			    case 3: useHealthPotion();
+			    	System.out.println(this.name + " has " + this.getHitPoints() + " health after the potion");
+			    	break;
 			    default:
 			        System.out.println("invalid choice!");
 		    }//end switch
