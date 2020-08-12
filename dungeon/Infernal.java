@@ -20,7 +20,7 @@ public class Infernal extends Monster
 
 	public void attack(DungeonCharacter opponent)
 	{
-		System.out.println(name + " Swings his body at" +
+		System.out.println(name + " slams his rocky fist into " +
 							opponent.getName() + ":");
 		super.attack(opponent);
 

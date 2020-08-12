@@ -57,7 +57,7 @@ public class King extends Hero
 		
 		do
 		{
-		   choice = super.attackMenu("Suprise Attack on " + opponent.getName(), opponent);
+		   choice = super.attackMenu("Smite Attack on " + opponent.getName(), opponent);
 		   
 		    switch (choice)
 		    {
