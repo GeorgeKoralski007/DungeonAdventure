@@ -51,7 +51,7 @@ a polymorphic reference (Monster) to accomplish this task.
 	private Monster generateMonster()
 	{
 
-		int choice = (int)(Math.random() * 5) + 1;
+		int choice = (int)(Math.random() * 6) + 1;
 
       
       return DungeonCharacterFactory.createMonster(choice);
