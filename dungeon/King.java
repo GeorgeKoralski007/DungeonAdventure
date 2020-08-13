@@ -57,7 +57,7 @@ public class King extends Hero
 		
 		do
 		{
-		   choice = super.attackMenu("Suprise Attack on " + opponent.getName(), opponent);
+		   choice = super.attackMenu("Smite Attack on " + opponent.getName(), opponent);
 		   
 		    switch (choice)
 		    {
@@ -65,6 +65,9 @@ public class King extends Hero
 			        break;
 			    case 2: specialSkill(opponent);
 			        break;
+			    case 3: useHealthPotion();
+			    	System.out.println(this.name + " has " + this.getHitPoints() + " health after the potion");
+			    	break;
 			    default:
 			        System.out.println("invalid choice!");
 		    }//end switch
