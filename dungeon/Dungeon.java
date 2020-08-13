@@ -5,8 +5,10 @@ public class Dungeon
 {
 	private static int DUNGEON_SIZE = 5;
 	private Room[][] rooms;
+	private int heroRow;
+	private int heroCol;
 	
-	public Dungeon()
+	Dungeon()
 	{
 		rooms = new Room[DUNGEON_SIZE][DUNGEON_SIZE];
 		for (int row = 0; row < DUNGEON_SIZE; row++) {
@@ -18,10 +20,19 @@ public class Dungeon
 				rooms[row][col] = new Room(hasNorthDoor, hasEastDoor, hasSouthDoor, hasWestDoor);
 			}
 		}
+		
+		// while loop to assign random entrance
+		
+		// while loop to assign random exit
+		
+		// while loop to assign 4 pillars of OO
+		
+		// generate monsters in rooms
 	}
 	
 	// Print the whole dungeon
 	// each room is represented by 3x3 characters
+	// Hidden key should be used to print the whole dungeon
 	public void print()
 	{
 		System.out.println();

@@ -126,6 +126,7 @@ public class Room
 	▪ H - Healing Potion
 	▪ E - Empty Room
 	▪ X - Monster
+	▪ # - Pillar of OO
 	Example: Room 1,1 might look like
 	* - *
 	| P |
@@ -167,6 +168,10 @@ public class Room
 		if (hasPotion()){
 			numItem++;
 			roomContent = "H";
+		}
+		if (hasPillarOfOO()){
+			numItem++;
+			roomContent = "#";
 		}
 		if (hasMonster()){
 			numItem++;
