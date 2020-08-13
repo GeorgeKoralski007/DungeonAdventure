@@ -5,7 +5,7 @@ public abstract class Hero extends DungeonCharacter
 {
 	protected double chanceToBlock;
 	protected int numTurns;
-
+	private int healthPotions=2;
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
   public Hero(String name, int hitPoints, int attackSpeed,
@@ -98,16 +98,33 @@ This method is called by: external sources
 	}//end battleChoices
 	
 	//Changed the way battleChoices works in Hero
-	//Can be overloaded if a new hero ends up having 3 moves
+	//Can be overloaded if a new hero ends up having 4 moves
 	public int attackMenu(String specialMove, DungeonCharacter opponent){
 		int choice;
       do {
 			System.out.println("1. Attack Opponent");
 			System.out.println("2. " + specialMove);
+			System.out.println("3. Use A HealthPotion:" + getHealthPotion() + " Remaining");
 			System.out.print("Choose an option: ");
 			choice = Keyboard.readInt();
-      } while (choice < 1 || choice > 2);
+      } while (choice < 1 || choice > 3);
 		return choice;
+	}
+	/* this method is used to retrieve the amount of health potions the hero has
+	 * 
+	 */
+	protected int getHealthPotion()
+	{
+		return healthPotions;
+	}
+	protected void useHealthPotion()
+	{
+		hitPoints = this.hitPoints + 50;
+		this.healthPotions = healthPotions-1;
+	}
+	protected void healthPotionPickedUp()
+	{
+		healthPotions++;
 	}
 
 }//end Hero class
