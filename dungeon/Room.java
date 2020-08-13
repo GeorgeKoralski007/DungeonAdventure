@@ -51,6 +51,10 @@ public class Room
 		}
 	}
 	
+	public boolean hasPillarOfOO() { return pillarOfOO != null; }
+	public String getPillarOfOO() { return pillarOfOO; }
+	public void setPillarOfOO(String pillar) { pillarOfOO = pillar; }
+	
 	// Methods for entrance and exit
 	public void setEntrance() {
 		this.isEntrance = true;
@@ -133,6 +137,11 @@ public class Room
 	************************************/
 	@Override
 	public String toString() {
+		return String.format("%s\n%s\n%s", getLine(0), getLine(1), getLine(2));
+	}
+	
+	public String getLine(int line)
+	{
 		String northDoor = hasNorthDoor ? "-" : "*";
 		String southDoor = hasSouthDoor ? "-" : "*";
 		String eastDoor = hasEastDoor ? "|" : "*";
@@ -166,6 +175,13 @@ public class Room
 		if (numItem > 1){
 			roomContent = "M";
 		}
-		return String.format("*%s*\n%s%s%s\n*%s*", northDoor, westDoor, roomContent, eastDoor, southDoor);
+		
+		if (line == 0)
+			return String.format("*%s*", northDoor);
+		else if (line == 1)
+			return String.format("%s%s%s", westDoor, roomContent, eastDoor);
+		else if (line == 2)
+			return String.format("*%s*", southDoor);
+		return "";
 	}
 }
