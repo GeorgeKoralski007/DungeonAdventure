@@ -11,6 +11,7 @@ class HeroTests {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		System.out.println("Name Your Character \"Jimmy\" in order to properly test readName method");
 		test = DungeonCharacterFactory.createHero(2);
 	}
 
@@ -23,6 +24,13 @@ class HeroTests {
 		assertEquals(1,test.getHealthPotion());
 		test.healthPotionPickedUp();
 		assertEquals(2,test.getHealthPotion());
+	}
+	
+	@Test
+	void testReadName() {
+		
+		String name = test.getName();
+		assertTrue(name.equalsIgnoreCase("jimmy"));
 	}
 
 }
