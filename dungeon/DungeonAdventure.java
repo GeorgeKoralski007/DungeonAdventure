@@ -31,13 +31,16 @@ this task
 		int choice;
       do
       {
-    	  (new Dungeon()).printAllRooms(); // TEST ONLY
+    	  Dungeon d = new Dungeon();
+    	  d.printAllRooms(); // TEST ONLY
+    	  d.printHeroRoom(); // TEST ONLY
+    	  d.printHeroRoomWithVisibility(); // TEST ONLY
     	  
    		System.out.println("Choose a hero:\n" +
-   					          "1. Warrior\n" +
-   					      	 "2. Sorceress\n" +
+   					       "1. Warrior\n" +
+   					       "2. Sorceress\n" +
        	                   "3. Thief\n"+
-                            "4. King\n" +
+                           "4. King\n" +
        	                   "5. Druid");
 		   choice = Keyboard.readInt();
       } while (choice < 1 || choice > 5);

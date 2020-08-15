@@ -22,6 +22,8 @@ public class Dungeon
 		}
 		
 		// while loop to assign random entrance
+		heroRow = 1;
+		heroCol = 1;
 		
 		// while loop to assign random exit
 		
@@ -93,11 +95,22 @@ public class Dungeon
 	
 	public void printHeroRoom()
 	{
-
+		System.out.println(this.rooms[heroRow][heroCol]);
 	}
 	
 	public void printHeroRoomWithVisibility()
 	{
-
+		System.out.println();
+		int startRow = Math.max(0, heroRow-1);
+		int endRow = Math.min(DUNGEON_SIZE-1, heroRow+1);		
+		int startCol = Math.max(0, heroCol-1);
+		int endCol = Math.min(DUNGEON_SIZE-1, heroCol+1);	
+		for (int row = startRow * 3; row < (endRow+1) *3; row++) {
+			for (int col = startCol; col <= endCol; col++) {
+				System.out.print(rooms[row / 3][col].getLine(row % 3));
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 }
