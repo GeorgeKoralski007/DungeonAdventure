@@ -128,7 +128,13 @@ This method is called by: external sources
 		healthPotions++;
 	}
 
-	protected void useVisionPotion() {}
+	protected boolean useVisionPotion(Dungeon map) {
+		if(this.visionPotions > 0) {
+			this.visionPotions--;
+			map.printHeroRoomWithVisibility();
+			return true;
+		}else return false;
+	}
 	
 	protected void visionPotionPickedUp() {
 		this.visionPotions++;

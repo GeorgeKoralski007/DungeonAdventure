@@ -101,7 +101,7 @@ private void move(Dungeon game) {
 		System.out.println("W: Move West");		
 	}
 	if(this.theHero.getVisionPotion()>0)
-		System.out.println("V: To see your surrondings:  Vision potions Remaining: "+ this.theHero.getHealthPotion());
+		System.out.println("V: To see your surrondings:  Vision potions Remaining: "+ this.theHero.getVisionPotion());
 	game.printHeroRoom();
 	game.MoveHero(Keyboard.readString(), this.theHero);
 	
