@@ -36,7 +36,6 @@ private void start(Hero hero) {
     Room room;
 	while(hero.isAlive()) {
 		room = game.getHeroRoom();
-		
 		game.printHeroRoom();
 		
 		if(room.hasPillarOfOO()) {
@@ -54,7 +53,7 @@ private void start(Hero hero) {
 		
 		if(room.hasPotion()) {
 			System.out.println("You have picked up a potion");
-			hero.healthPotionPickedUp();
+			hero.healthPotionPickedUp(room.getPotionHealingPoints());
 			
 		} 
 		if(room.hasVisionPotion()) {
@@ -100,10 +99,18 @@ private void move(Dungeon game) {
 	if (game.getHeroRoom().hasWestDoor()) {
 		System.out.println("W: Move West");		
 	}
-	if(this.theHero.getVisionPotion()>0)
-		System.out.println("V: To see your surrondings:  Vision potions Remaining: "+ this.theHero.getHealthPotion());
-	game.printHeroRoom();
-	game.MoveHero(Keyboard.readString(), this.theHero);
+	if(this.theHero.getVisionPotion() > 0)
+		System.out.println("V: To see your surrondings:  Vision potions Remaining: "+ this.theHero.getVisionPotion());
+
+	String choice = Keyboard.readString().toUpperCase();
+	if (choice.equals("?")) {
+		game.printAllRooms();
+	} else if (choice.equals("V") && this.theHero.getVisionPotion()>0) {
+		this.theHero.useVisionPotion();
+		game.printHeroRoomWithVisibility();
+	} else {
+		game.MoveHero(choice);
+	}
 	
 }
 

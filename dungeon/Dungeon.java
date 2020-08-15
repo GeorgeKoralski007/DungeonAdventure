@@ -83,10 +83,9 @@ public class Dungeon
 		return (int)(Math.random() * (max-min+1)) + min;
 	}
 	
-	public boolean MoveHero(String direction ,Hero hero) {
+	public boolean MoveHero(String direction) {
 		boolean invalidMove = false;
 		Room heroRoom = getHeroRoom();
-		if(hero.isAlive()) {
 		switch(direction.toUpperCase())
 		{
 			case "N": 
@@ -113,14 +112,10 @@ public class Dungeon
 				else
 					invalidMove  = true;
 				break;	
-			case "V":
-				if(hero.getVisionPotion()>0)
-				hero.useVisionPotion(this);
-				break;
 			default:
 				invalidMove = true;
 				
-		}}
+		}
 		
 		if(invalidMove)
 			System.out.println("Invalid Move");
@@ -151,7 +146,7 @@ public class Dungeon
 	}
 	
 	// print the hero room and the surrounding 8 rooms if any
-	protected void printHeroRoomWithVisibility()
+	public void printHeroRoomWithVisibility()
 	{
 		System.out.println();
 		int startRow = Math.max(0, heroRow-1);

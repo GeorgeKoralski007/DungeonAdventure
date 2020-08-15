@@ -1,11 +1,13 @@
 package dungeon;
 
+import java.util.ArrayList;
 
 public abstract class Hero extends DungeonCharacter
 {
 	protected double chanceToBlock;
 	protected int numTurns;
-	private int healthPotions = 0;
+
+	private ArrayList<Integer> healthPotions = new ArrayList<Integer>();
 	private int visionPotions = 0;
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
@@ -116,19 +118,24 @@ This method is called by: external sources
 	 */
 	protected int getHealthPotion()
 	{
-		return healthPotions;
+		return healthPotions.size();
 	}
 	protected void useHealthPotion()
 	{
-		hitPoints = this.hitPoints + 50;
-		this.healthPotions = healthPotions-1;
+		if (!healthPotions.isEmpty()) {
+			
+			hitPoints += healthPotions.remove(0);;
+		}
 	}
-	protected void healthPotionPickedUp()
+	protected void healthPotionPickedUp(int healthPoints)
 	{
-		healthPotions++;
+		healthPotions.add(healthPoints);
 	}
 
-	protected void useVisionPotion() {}
+	public void useVisionPotion() {
+		if (visionPotions > 0)
+			visionPotions--;
+	}
 	
 	protected void visionPotionPickedUp() {
 		this.visionPotions++;

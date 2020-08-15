@@ -22,7 +22,7 @@ class HeroTests {
 		test.useHealthPotion();
 		assertEquals(hp+50,test.getHitPoints());
 		assertEquals(1,test.getHealthPotion());
-		test.healthPotionPickedUp();
+		test.healthPotionPickedUp(10);
 		assertEquals(2,test.getHealthPotion());
 	}
 	
