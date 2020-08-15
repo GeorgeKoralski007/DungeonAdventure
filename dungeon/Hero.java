@@ -6,6 +6,7 @@ public abstract class Hero extends DungeonCharacter
 	protected double chanceToBlock;
 	protected int numTurns;
 	private int healthPotions=2;
+	private int visionPotions = 0;
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
   public Hero(String name, int hitPoints, int attackSpeed,
@@ -127,4 +128,12 @@ This method is called by: external sources
 		healthPotions++;
 	}
 
+	protected void useVisionPotion() {}
+	
+	protected void visionPotionPickedUp() {
+		this.visionPotions++;
+	}
+	protected int getVisionPotion() {
+		return this.visionPotions;
+	}
 }//end Hero class
