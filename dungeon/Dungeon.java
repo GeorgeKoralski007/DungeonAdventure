@@ -10,7 +10,7 @@ public class Dungeon
 	
 	Dungeon()
 	{
-		rooms = new Room[DUNGEON_SIZE][DUNGEON_SIZE];
+		this.rooms = new Room[DUNGEON_SIZE][DUNGEON_SIZE];
 		for (int row = 0; row < DUNGEON_SIZE; row++) {
 			for (int col = 0; col < DUNGEON_SIZE; col++) {
 				boolean hasNorthDoor = row > 0;
@@ -30,10 +30,55 @@ public class Dungeon
 		// generate monsters in rooms
 	}
 	
+	// Get Room where Hero is currently located
+	// Use the Room interface to get its content
+	public Room getHeroRoom() {
+		return this.rooms[heroRow][heroCol];
+	}
+	
+	public boolean MoveHero(String direction) {
+		boolean invalidMove = false;
+		Room heroRoom = getHeroRoom();
+		switch(direction.toUpperCase())
+		{
+			case "N": 
+				if (heroRow > 0 && heroRoom.hasNorthDoor())
+					heroRow--;
+				else
+					invalidMove  = true;
+				break;
+			case "E": 
+				if (heroCol < DUNGEON_SIZE - 1 && heroRoom.hasEastDoor())
+					heroCol++;
+				else
+					invalidMove  = true;
+				break;
+			case "S":
+				if (heroRow < DUNGEON_SIZE - 1 && heroRoom.hasSouthDoor())
+					heroRow++;
+				else
+					invalidMove  = true;
+				break;
+			case "W": 
+				if (heroCol > 0 && heroRoom.hasWestDoor())
+					heroCol--;
+				else
+					invalidMove  = true;
+				break;	
+			default:
+				invalidMove = true;
+		}
+		
+		if(invalidMove)
+			System.out.println("Invalid Move");
+		
+		return !invalidMove;
+	}
+	
 	// Print the whole dungeon
 	// each room is represented by 3x3 characters
 	// Hidden key should be used to print the whole dungeon
-	public void print()
+	public void printAllRooms()
 	{
 		System.out.println();
 		for (int row = 0; row < DUNGEON_SIZE * 3; row++) {
@@ -44,5 +89,15 @@ public class Dungeon
 		}
 		
 		System.out.println();
+	}
+	
+	public void printHeroRoom()
+	{
+
+	}
+	
+	public void printHeroRoomWithVisibility()
+	{
+
 	}
 }
