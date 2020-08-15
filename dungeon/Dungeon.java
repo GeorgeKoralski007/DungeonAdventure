@@ -22,10 +22,18 @@ public class Dungeon
 		}
 		
 		// while loop to assign random entrance
-		heroRow = 1;
-		heroCol = 1;
+		heroRow = getRandom(0, DUNGEON_SIZE-1);
+		heroCol = getRandom(0, DUNGEON_SIZE-1);
+		this.rooms[heroRow][heroCol].setEntrance();
 		
 		// while loop to assign random exit
+		int exitRow;
+		int exitCol;
+		do {
+			exitRow = getRandom(0, DUNGEON_SIZE-1);
+			exitCol = getRandom(0, DUNGEON_SIZE-1);
+		} while (rooms[exitRow][exitCol].isEntrance());
+		this.rooms[exitRow][exitCol].setExit();
 		
 		// while loop to assign 4 pillars of OO
 		
@@ -36,6 +44,11 @@ public class Dungeon
 	// Use the Room interface to get its content
 	public Room getHeroRoom() {
 		return this.rooms[heroRow][heroCol];
+	}
+	
+	// Helper method to generate random integer between min and max inclusive
+	private int getRandom(int min, int max) {
+		return (int)(Math.random() * (max-min+1)) + min;
 	}
 	
 	public boolean MoveHero(String direction) {
@@ -93,11 +106,13 @@ public class Dungeon
 		System.out.println();
 	}
 	
+	// Print only the room where the hero is
 	public void printHeroRoom()
 	{
 		System.out.println(this.rooms[heroRow][heroCol]);
 	}
 	
+	// print the hero room and the surrounding 8 rooms if any
 	public void printHeroRoomWithVisibility()
 	{
 		System.out.println();
