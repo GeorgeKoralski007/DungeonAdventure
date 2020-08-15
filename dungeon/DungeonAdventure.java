@@ -2,16 +2,18 @@
 package dungeon;
 
 public class DungeonAdventure
-{
+{  
+	Hero theHero;
    public static void main(String[] args)
    {
 	   DungeonAdventure dungeonGame = new DungeonAdventure();
+	 
 	   dungeonGame.Play();
     }//end main method
     
     public void Play()
     {
-      Hero theHero;
+     
       do
       {
          theHero = chooseHero();
@@ -27,7 +29,7 @@ public class DungeonAdventure
 private void start(Hero hero) {
 	
     Dungeon game = new Dungeon();
-    game.printAllRooms();
+ 
 
     
     int numberOfPillarsFound = 0;
@@ -66,7 +68,7 @@ private void start(Hero hero) {
 			Monster monster = room.getMonster();
 			System.out.println("You have encountered a monster, you must fight, running is for cowards.");
 			while(hero.isAlive() && monster.isAlive()) {
-				battle(hero, monster);
+				battle(hero, monster,game);
 			}
 		}
 
@@ -84,6 +86,7 @@ private void start(Hero hero) {
 }
 
 private void move(Dungeon game) {
+	
 	System.out.println("Choose action:");
 	if (game.getHeroRoom().hasNorthDoor()) {
 		System.out.println("N: Move North");		
@@ -97,8 +100,10 @@ private void move(Dungeon game) {
 	if (game.getHeroRoom().hasWestDoor()) {
 		System.out.println("W: Move West");		
 	}
+	if(this.theHero.getVisionPotion()>0)
+		System.out.println("V: To see your surrondings:  Vision potions Remaining: "+ this.theHero.getHealthPotion());
 	game.printHeroRoom();
-	game.MoveHero(Keyboard.readString());
+	game.MoveHero(Keyboard.readString(), this.theHero);
 	
 }
 
@@ -114,7 +119,7 @@ this task
       {
 
     	  
-   		System.out.println("Choose a hero:\n" +
+		System.out.println("Choose a hero:\n" +
    					       "1. Warrior\n" +
    					       "2. Sorceress\n" +
        	                   "3. Thief\n"+
@@ -151,7 +156,7 @@ and a Monster to be passed in.  Battle occurs in rounds.  The Hero
 goes first, then the Monster.  At the conclusion of each round, the
 user has the option of quitting.
 ---------------------------------------------------------------------*/
-	private void battle(Hero theHero, Monster theMonster)
+	private void battle(Hero theHero, Monster theMonster, Dungeon room)
 	{
 		char choice = 'y';
 		System.out.println(theHero.getName() + " battles " + theMonster.getName());
