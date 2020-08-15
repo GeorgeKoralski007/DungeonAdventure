@@ -5,8 +5,8 @@ public class DungeonAdventure
 {
    public static void main(String[] args)
    {
-	   DungeonAdventure dungeonGame = new DungeonAdventure();
-	   dungeonGame.Play();
+      DungeonAdventure dungeonGame = new DungeonAdventure();
+      dungeonGame.Play();
     }//end main method
     
     public void Play()
@@ -16,84 +16,10 @@ public class DungeonAdventure
       do
       {
          theHero = chooseHero();
-         
-         System.out.println("You are at the entrance to a strange place. \nYour mission is clear, find the pillars of OO and escape.\n"
-         		+ "Where would you like to go?");
-         
-         start(theHero);
-         
-//         theMonster = generateMonster();
-//         battle(theHero, theMonster);
+         theMonster = generateMonster();
+         battle(theHero, theMonster);
       } while (playAgain());
     }
-
-private void start(Hero hero) {
-	
-    Dungeon game = new Dungeon();
-    game.printAllRooms();
-    game.printHeroRoom();
-    //game.printHeroRoomWithVisibility();
-    
-    boolean win = false;
-    
-    do {
-    	while(hero.isAlive() && !win) {
-    		
-    		game.printHeroRoom();
-    		
-    		
-    		if(game.getHeroRoom().hasPillarOfOO()) {
-    			System.out.println("You have found a pillar of OO: " + game.getHeroRoom().getPillarOfOO());
-    		} 
-    		
-    		if(game.getHeroRoom().hasPit()) {
-    			double temp = hero.chanceToBlock;
-    			hero.chanceToBlock = 0;
-    			System.out.println(hero.name + " has fallen into a pit!");
-    			hero.subtractHitPoints(game.getHeroRoom().getPitDamagePoints());
-    			hero.chanceToBlock = temp;
-    		}
-    		
-    		if(game.getHeroRoom().hasPotion()) {
-    			System.out.println("You have picked up a potion");
-    			hero.healthPotionPickedUp();
-    			
-    		} 
-    		if(game.getHeroRoom().hasVisionPotion()) {
-    			System.out.println("You have picked up a Vision Potion!");
-    			hero.visionPotionPickedUp();
-    		}
-    		
-    		game.getHeroRoom().CleanObjects();
-    		if(game.getHeroRoom().hasMonster()) {
-    			
-    			Monster monster = game.getHeroRoom().getMonster();
-    			System.out.println("You have encountered a monster, you must fight, running is for cowards.");
-    			while(hero.isAlive() && monster.isAlive()) {
-    				battle(hero,monster);
-    			}
-    		}
-    		move(game);
-    		if(game.getHeroRoom().isExit()) {
-    			System.out.println(hero.name + " has reached the exit");
-    			if(true/*will be replaced with check for all pillars of OO*/) {
-    				System.out.println("You have won the game!");
-    				win = true;
-    				
-    			}
-    		}
-    		
-    	}
-    }while(playAgain());
-		
-	}
-
-private void move(Dungeon game) {
-	System.out.println("Move N, S, E, W");
-	game.printHeroRoom();
-	game.MoveHero(Keyboard.readString());
-	
-}
 
 /*-------------------------------------------------------------------
 chooseHero allows the user to select a hero, creates that hero, and
