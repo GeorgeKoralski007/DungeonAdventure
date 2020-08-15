@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 class RoomTests {
 
+	Room test;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -20,6 +22,7 @@ class RoomTests {
 
 	@BeforeEach
 	void setUp() throws Exception {
+	test = new Room(true,true,true,true);
 	}
 
 	@AfterEach
@@ -40,7 +43,7 @@ class RoomTests {
 		assertEquals(true, room.hasSouthDoor());
 		assertEquals(true, room.hasNorthDoor());
 	}
-	
+	@Test
 	void testEntranceAndExit() {
 		Room room = new Room(false, false, false, false);
 		room.setEntrance();
@@ -57,6 +60,31 @@ class RoomTests {
 		assertEquals(false, room.hasPotion());
 		assertEquals(false, room.hasVisionPotion());
 		assertEquals(false, room.hasPit());
+	}
+	
+	@Test
+	void testGeneratePit() {
+		assertFalse(test.hasPit());
+		test.generatePit();
+		assertTrue(test.hasPit());
+	}
+	
+	@Test
+	void testPotions() {
+		assertFalse(test.hasVisionPotion());
+		test.generateVisionPotion();
+		assertTrue(test.hasVisionPotion());
+		
+		assertFalse(test.hasPotion());
+		test.generatePotion();
+		assertTrue(test.hasPotion());
+	}
+	
+	@Test
+	void testSetMonster() {
+		assertFalse(test.hasMonster());
+		test.setMonster(DungeonCharacterFactory.createMonster(1));
+		assertTrue(test.hasMonster());
 	}
 
 }
