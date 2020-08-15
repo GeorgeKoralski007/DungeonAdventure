@@ -36,10 +36,42 @@ public class Dungeon
 		this.rooms[exitRow][exitCol].setExit();
 		
 		// while loop to assign 4 pillars of OO
+		addPillar("Abstraction");
+		addPillar("Polymorphism");
+		addPillar("Encapsulation");
+		addPillar("Inheritance");
 		
 		// generate monsters in rooms
+		for (int i=0; i<DUNGEON_SIZE; i++) {
+			addMonster();
+		}
 	}
 	
+	// Add a Monster to a randomly generated room that is not entrance or exit
+	private void addMonster() {
+		int row;
+		int col;
+		do {
+			row = getRandom(0, DUNGEON_SIZE-1);
+			col = getRandom(0, DUNGEON_SIZE-1);
+		} while (rooms[row][col].isEntrance() || rooms[row][col].isExit() || rooms[row][col].hasMonster());
+		Monster monster = DungeonCharacterFactory.createMonster(getRandom(1,6));
+		this.rooms[row][col].setMonster(monster);
+	}
+
+	// Add pillar of OO to a random room that is not entry or exit
+	private void addPillar(String pillar) {
+		int row;
+		int col;
+		do {
+			row = getRandom(0, DUNGEON_SIZE-1);
+			col = getRandom(0, DUNGEON_SIZE-1);
+		} while (rooms[row][col].isEntrance() || rooms[row][col].isExit() || rooms[row][col].hasPillarOfOO());
+		this.rooms[row][col].setPillarOfOO(pillar);
+	}
+	
+	// private 
+
 	// Get Room where Hero is currently located
 	// Use the Room interface to get its content
 	public Room getHeroRoom() {
