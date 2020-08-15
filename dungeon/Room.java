@@ -97,6 +97,7 @@ public class Room
 		this.potionHealingPoints = 0;
 		this.hasVisionPotion = false;
 		this.pitDamagePoints = 0;
+		this.pillarOfOO = null;
 	}
 	
 	public void setMonster(Monster monster ) {

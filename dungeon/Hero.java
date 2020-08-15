@@ -5,7 +5,7 @@ public abstract class Hero extends DungeonCharacter
 {
 	protected double chanceToBlock;
 	protected int numTurns;
-	private int healthPotions=2;
+	private int healthPotions = 0;
 	private int visionPotions = 0;
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user

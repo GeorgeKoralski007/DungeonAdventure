@@ -12,18 +12,15 @@ public class DungeonAdventure
     public void Play()
     {
       Hero theHero;
-      Monster theMonster;
       do
       {
          theHero = chooseHero();
          
-         System.out.println("You are at the entrance to a strange place. \nYour mission is clear, find the pillars of OO and escape.\n"
+         System.out.println("You are at the entrance to a strange place. \nYour mission is clear, find the four pillars of OO and escape.\n"
          		+ "Where would you like to go?");
          
          start(theHero);
-         
-//         theMonster = generateMonster();
-//         battle(theHero, theMonster);
+
       } while (playAgain());
     }
 
@@ -31,65 +28,75 @@ private void start(Hero hero) {
 	
     Dungeon game = new Dungeon();
     game.printAllRooms();
-    game.printHeroRoom();
-    //game.printHeroRoomWithVisibility();
+
     
-    boolean win = false;
-    
-    do {
-    	while(hero.isAlive() && !win) {
-    		
-    		game.printHeroRoom();
-    		
-    		
-    		if(game.getHeroRoom().hasPillarOfOO()) {
-    			System.out.println("You have found a pillar of OO: " + game.getHeroRoom().getPillarOfOO());
-    		} 
-    		
-    		if(game.getHeroRoom().hasPit()) {
-    			double temp = hero.chanceToBlock;
-    			hero.chanceToBlock = 0;
-    			System.out.println(hero.name + " has fallen into a pit!");
-    			hero.subtractHitPoints(game.getHeroRoom().getPitDamagePoints());
-    			hero.chanceToBlock = temp;
-    		}
-    		
-    		if(game.getHeroRoom().hasPotion()) {
-    			System.out.println("You have picked up a potion");
-    			hero.healthPotionPickedUp();
-    			
-    		} 
-    		if(game.getHeroRoom().hasVisionPotion()) {
-    			System.out.println("You have picked up a Vision Potion!");
-    			hero.visionPotionPickedUp();
-    		}
-    		
-    		game.getHeroRoom().CleanObjects();
-    		if(game.getHeroRoom().hasMonster()) {
-    			
-    			Monster monster = game.getHeroRoom().getMonster();
-    			System.out.println("You have encountered a monster, you must fight, running is for cowards.");
-    			while(hero.isAlive() && monster.isAlive()) {
-    				battle(hero,monster);
-    			}
-    		}
-    		move(game);
-    		if(game.getHeroRoom().isExit()) {
-    			System.out.println(hero.name + " has reached the exit");
-    			if(true/*will be replaced with check for all pillars of OO*/) {
-    				System.out.println("You have won the game!");
-    				win = true;
-    				
-    			}
-    		}
-    		
-    	}
-    }while(playAgain());
+    int numberOfPillarsFound = 0;
+    Room room;
+	while(hero.isAlive()) {
+		room = game.getHeroRoom();
 		
-	}
+		game.printHeroRoom();
+		
+		if(room.hasPillarOfOO()) {
+			System.out.println("You have found a pillar of OO: " + room.getPillarOfOO());
+			numberOfPillarsFound++;
+		} 
+		
+		if(room.hasPit()) {
+			double temp = hero.chanceToBlock;
+			hero.chanceToBlock = 0;
+			System.out.println(hero.name + " has fallen into a pit!");
+			hero.subtractHitPoints(room.getPitDamagePoints());
+			hero.chanceToBlock = temp;
+		}
+		
+		if(room.hasPotion()) {
+			System.out.println("You have picked up a potion");
+			hero.healthPotionPickedUp();
+			
+		} 
+		if(room.hasVisionPotion()) {
+			System.out.println("You have picked up a Vision Potion!");
+			hero.visionPotionPickedUp();
+		}
+		
+		room.CleanObjects();
+		if(room.hasMonster()) {
+			
+			Monster monster = room.getMonster();
+			System.out.println("You have encountered a monster, you must fight, running is for cowards.");
+			while(hero.isAlive() && monster.isAlive()) {
+				battle(hero, monster);
+			}
+		}
+
+		if(room.isExit()) {
+			System.out.println(hero.name + " has reached the exit");
+			if(numberOfPillarsFound >= 4) {
+				System.out.println("You have won the game!");
+				break;
+			} else {
+				System.out.println("You don't have all the pillars. Keep searching!");
+			}
+		}
+		move(game);
+	}	
+}
 
 private void move(Dungeon game) {
-	System.out.println("Move N, S, E, W");
+	System.out.println("Choose action:");
+	if (game.getHeroRoom().hasNorthDoor()) {
+		System.out.println("N: Move North");		
+	}
+	if (game.getHeroRoom().hasSouthDoor()) {
+		System.out.println("S: Move South");		
+	}
+	if (game.getHeroRoom().hasEastDoor()) {
+		System.out.println("E: Move East");		
+	}
+	if (game.getHeroRoom().hasWestDoor()) {
+		System.out.println("W: Move West");		
+	}
 	game.printHeroRoom();
 	game.MoveHero(Keyboard.readString());
 	
@@ -105,10 +112,7 @@ this task
 		int choice;
       do
       {
-    	  Dungeon d = new Dungeon();
-    	  d.printAllRooms(); // TEST ONLY
-    	  d.printHeroRoom(); // TEST ONLY
-    	  d.printHeroRoomWithVisibility(); // TEST ONLY
+
     	  
    		System.out.println("Choose a hero:\n" +
    					       "1. Warrior\n" +
@@ -123,20 +127,7 @@ this task
 
 	}//end chooseHero method
 
-/*-------------------------------------------------------------------
-generateMonster randomly selects a Monster and returns it.  It utilizes
-a polymorphic reference (Monster) to accomplish this task.
----------------------------------------------------------------------*/
-	private Monster generateMonster()
-	{
 
-
-		int choice = (int)(Math.random() * 6) + 1;
-
-
-      
-      return DungeonCharacterFactory.createMonster(choice);
-   }//end generateMonster method
 
 /*-------------------------------------------------------------------
 playAgain allows gets choice from user to play another game.  It returns
@@ -174,19 +165,19 @@ user has the option of quitting.
 
 			//monster's turn (provided it's still alive!)
 			if (theMonster.isAlive())
-         {
-            if (Math.random() <= 0.3) // 30% chance for special skill attack
-			      theMonster.specialSkill(theHero);
-            else
-               theMonster.attack(theHero);
-         }
-         
-			//let the player bail out if desired only if both are alive
-         if (theHero.isAlive() && theMonster.isAlive())
-         do {
-   			System.out.print("\nContinue battle (y/n): ");
-   			choice = Character.toLowerCase(Keyboard.readChar());
-         } while (choice != 'y' && choice != 'n');
+	         {
+	            if (Math.random() <= 0.3) // 30% chance for special skill attack
+				      theMonster.specialSkill(theHero);
+	            else
+	               theMonster.attack(theHero);
+	         }
+	         
+				//let the player bail out if desired only if both are alive
+	         if (theHero.isAlive() && theMonster.isAlive())
+	         do {
+	   			System.out.print("\nContinue battle (y/n): ");
+	   			choice = Character.toLowerCase(Keyboard.readChar());
+	         } while (choice != 'y' && choice != 'n');
 
 		} while  (theHero.isAlive() && theMonster.isAlive() && choice == 'y'); //end battle loop
 
