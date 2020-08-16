@@ -68,7 +68,8 @@ public class Dungeon
 		do {
 			row = getRandom(0, DUNGEON_SIZE-1);
 			col = getRandom(0, DUNGEON_SIZE-1);
-		} while (rooms[row][col].isEntrance() || rooms[row][col].isExit() || rooms[row][col].hasPillarOfOO());
+		} while (rooms[row][col].isEntrance() || rooms[row][col].isExit() || rooms[row][col].hasPillarOfOO() || 
+				(rooms[row][col].hasMonster() || rooms[row][col].hasPit() || rooms[row][col].hasPotion() || rooms[row][col].hasVisionPotion()));
 		this.rooms[row][col].setPillarOfOO(pillar);
 	}
 	
