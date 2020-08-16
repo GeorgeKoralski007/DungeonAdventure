@@ -30,8 +30,6 @@ private void start(Hero hero) {
 	
     Dungeon game = new Dungeon();
  
-
-    
     int numberOfPillarsFound = 0;
     Room room;
 	while(hero.isAlive()) {
