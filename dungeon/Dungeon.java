@@ -18,29 +18,9 @@ public class Dungeon
 				boolean hasEastDoor = col < DUNGEON_SIZE-1;
 				boolean hasSouthDoor = row < DUNGEON_SIZE-1;
 				boolean hasWestDoor = col > 0;
-				
-				// Randomly choose to close a vertical door with 20% chance
-				if (Math.random() <= 0.2)
-				{
-					if (Math.random() <= 0.5)
-						hasWestDoor = false;
-					else
-						hasEastDoor = false;
-				}
-				
-				// Randomly choose to close a horizontal door with 20% chance
-				if (Math.random() <= 0.2)
-				{
-					if (Math.random() <= 0.5)
-						hasNorthDoor = false;
-					else
-						hasSouthDoor = false;
-				}
-				
 				rooms[row][col] = new Room(hasNorthDoor, hasEastDoor, hasSouthDoor, hasWestDoor);
 			}
 		}
-		
 		
 		// while loop to assign random entrance
 		heroRow = getRandom(0, DUNGEON_SIZE-1);
@@ -186,6 +166,9 @@ public class Dungeon
 		}
 		System.out.println();
 	}
-
+	protected Room[][] roomGetter()
+	{
+		return rooms;
+	}
 
 }
