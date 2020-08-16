@@ -106,7 +106,7 @@ private void move(Dungeon game) {
 	if(this.theHero.getVisionPotion() > 0)
 		System.out.println("V: To see your surroundings:  Vision potions Remaining: "+ this.theHero.getVisionPotion());
 	
-	System.out.println("?: See all rooms (if you want to cheat) Q to quit");
+	System.out.println("Q to quit\n?: See all rooms (if you want to cheat)\nHEALTH: Cheat to give player a terrabyte of health");
 
 	String choice = Keyboard.readString().toUpperCase();
 	if (choice.equals("?")) {
@@ -116,8 +116,10 @@ private void move(Dungeon game) {
 		game.printHeroRoomWithVisibility();
 	} else if(choice.equals("Q")) { 
 		System.exit(-1);
+	} else if(choice.equals("HEALTH")) {
+		theHero.addHitPoints(1024);
+		System.out.println("Cheat activated, you now have " + theHero.getHitPoints() + " hit points");
 	}
-	
 	else {
 		game.MoveHero(choice);
 	}
