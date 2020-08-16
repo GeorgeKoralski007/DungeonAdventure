@@ -77,7 +77,36 @@ public void subtractHitPoints(int hitPoints)
 
 	}//end method
 
-	protected abstract void battleChoices(DungeonCharacter opponent);
+	public void battleChoices(DungeonCharacter opponent)
+	{
+		initializeTurns(opponent);
+		
+		int choice;
+		
+		do
+		{
+		   choice = attackMenu("Smite Attack on " + opponent.getName(), opponent);
+		   
+		    switch (choice)
+		    {
+			    case 1: attack(opponent);
+			        break;
+			    case 2: specialSkill(opponent);
+			        break;
+			    case 3: useHealthPotion();
+			    	System.out.println(this.name + " has " + this.getHitPoints() + " health after the potion");
+			    	break;
+			    default:
+			        System.out.println("invalid choice!");
+		    }//end switch
+	
+			numTurns--;
+			if (numTurns > 0)
+			    System.out.println("Number of turns remaining is: " + numTurns);
+	
+		} while(numTurns > 0);
+	
+	}
    
 /*-------------------------------------------------------
 InitializeTurns.  It computes the
@@ -99,7 +128,7 @@ This method is called by: external sources
 
 		System.out.println("Number of turns this round is: " + numTurns);
 
-	}//end battleChoices
+	}
 	
 	//Changed the way battleChoices works in Hero
 	//Can be overloaded if a new hero ends up having 4 moves
@@ -108,7 +137,8 @@ This method is called by: external sources
       do {
 			System.out.println("1. Attack Opponent");
 			System.out.println("2. " + specialMove);
-			System.out.println("3. Use A HealthPotion:" + getHealthPotion() + " Remaining");
+			if (getHealthPotion() > 0)
+				System.out.println("3. Use A HealthPotion:" + getHealthPotion() + " Remaining");
 			System.out.print("Choose an option: ");
 			choice = Keyboard.readInt();
       } while (choice < 1 || choice > 3);

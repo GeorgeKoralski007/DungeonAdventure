@@ -49,34 +49,5 @@ public class King extends Hero
 		smiteAttack(opponent);
 	}
 
-    public void battleChoices(DungeonCharacter opponent)
-	{
-		initializeTurns(opponent);
-		
-		int choice;
-		
-		do
-		{
-		   choice = super.attackMenu("Smite Attack on " + opponent.getName(), opponent);
-		   
-		    switch (choice)
-		    {
-			    case 1: attack(opponent);
-			        break;
-			    case 2: specialSkill(opponent);
-			        break;
-			    case 3: useHealthPotion();
-			    	System.out.println(this.name + " has " + this.getHitPoints() + " health after the potion");
-			    	break;
-			    default:
-			        System.out.println("invalid choice!");
-		    }//end switch
 
-			numTurns--;
-			if (numTurns > 0)
-			    System.out.println("Number of turns remaining is: " + numTurns);
-
-		} while(numTurns > 0);
-
-    }
 }

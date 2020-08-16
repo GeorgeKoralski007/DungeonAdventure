@@ -60,35 +60,6 @@ public class Warrior extends Hero
 		crushingBlow(opponent);
 	}
    
-   public void battleChoices(DungeonCharacter opponent)
-	{
-    	initializeTurns(opponent);
-		
-		int choice;
 
-		do
-		{
-		   choice = super.attackMenu("Crushing blow on " + opponent.getName(), opponent);
-
-		    switch (choice)
-		    {
-			    case 1: attack(opponent);
-			        break;
-			    case 2: specialSkill(opponent);
-			        break;
-			    case 3: useHealthPotion();
-		    		System.out.println(this.name + " has " + this.getHitPoints() + " health after the potion");
-		    		break;
-			    default:
-			        System.out.println("invalid choice!");
-		    }//end switch
-
-			numTurns--;
-			if (numTurns > 0)
-			    System.out.println("Number of turns remaining is: " + numTurns);
-
-		} while(numTurns > 0);
-
-    }//end battleChoices method
 
 }//end Hero class
