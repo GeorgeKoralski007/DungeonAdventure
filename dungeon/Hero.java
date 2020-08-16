@@ -1,3 +1,4 @@
+
 package dungeon;
 
 import java.util.ArrayList;
@@ -143,4 +144,5 @@ This method is called by: external sources
 	protected int getVisionPotion() {
 		return this.visionPotions;
 	}
+
 }//end Hero class

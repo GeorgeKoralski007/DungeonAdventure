@@ -202,5 +202,4 @@ user has the option of quitting.
 
 	}//end battle method
 
-
 }//end Dungeon class
