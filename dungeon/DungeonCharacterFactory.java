@@ -11,6 +11,7 @@ public class DungeonCharacterFactory
 
 			case 4: return new King();
 			case 5: return new Druid();
+			case 6: System.exit(-1);
 
 			default: throw new IllegalArgumentException("choice is not valid");
 		}

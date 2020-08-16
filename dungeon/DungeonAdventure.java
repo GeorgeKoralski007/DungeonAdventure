@@ -106,7 +106,7 @@ private void move(Dungeon game) {
 	if(this.theHero.getVisionPotion() > 0)
 		System.out.println("V: To see your surroundings:  Vision potions Remaining: "+ this.theHero.getVisionPotion());
 	
-	System.out.println("?: See all rooms (if you want to cheat)");
+	System.out.println("?: See all rooms (if you want to cheat) Q to quit");
 
 	String choice = Keyboard.readString().toUpperCase();
 	if (choice.equals("?")) {
@@ -114,7 +114,11 @@ private void move(Dungeon game) {
 	} else if (choice.equals("V") && this.theHero.getVisionPotion()>0) {
 		this.theHero.useVisionPotion();
 		game.printHeroRoomWithVisibility();
-	} else {
+	} else if(choice.equals("Q")) { 
+		System.exit(-1);
+	}
+	
+	else {
 		game.MoveHero(choice);
 	}
 	
@@ -135,13 +139,17 @@ this task
 		System.out.println("Choose a hero:\n" +
    					       "1. Warrior\n" +
    					       "2. Sorceress\n" +
-       	                   "3. Thief\n"+
+       	                   "3. Thief\n" +
                            "4. King\n" +
-       	                   "5. Druid");
+       	                   "5. Druid\n" + 
+                           "6. Quit");
 		   choice = Keyboard.readInt();
-      } while (choice < 1 || choice > 5);
-      
-      return DungeonCharacterFactory.createHero(choice);
+      } while (choice < 1 || choice > 6);
+      if(choice != 6)
+    	  return DungeonCharacterFactory.createHero(choice);
+      else
+    	  return DungeonCharacterFactory.createHero(6);
+      	  
 
 	}//end chooseHero method
 
