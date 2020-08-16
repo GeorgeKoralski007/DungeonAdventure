@@ -26,6 +26,7 @@ public class Dungeon
 		heroRow = getRandom(0, DUNGEON_SIZE-1);
 		heroCol = getRandom(0, DUNGEON_SIZE-1);
 		this.rooms[heroRow][heroCol].setEntrance();
+		getHeroRoom().setHasHero(true);
 		
 		// while loop to assign random exit
 		int exitRow;
@@ -87,6 +88,7 @@ public class Dungeon
 	public boolean MoveHero(String direction) {
 		boolean invalidMove = false;
 		Room heroRoom = getHeroRoom();
+		heroRoom.setHasHero(false);
 		switch(direction.toUpperCase())
 		{
 			case "N": 
@@ -117,6 +119,7 @@ public class Dungeon
 				invalidMove = true;
 				
 		}
+		getHeroRoom().setHasHero(true);
 		
 		if(invalidMove)
 			System.out.println("Invalid Move");

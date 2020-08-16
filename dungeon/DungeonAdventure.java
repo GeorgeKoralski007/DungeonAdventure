@@ -61,13 +61,17 @@ private void start(Hero hero) {
 			hero.visionPotionPickedUp();
 		}
 		
-		room.CleanObjects();
+		room.CleanObjects(); // remove potions, pits and pillars
+		
 		if(room.hasMonster()) {
 			
 			Monster monster = room.getMonster();
 			System.out.println("You have encountered a monster, you must fight, running is for cowards.");
-			while(hero.isAlive() && monster.isAlive()) {
-				battle(hero, monster,game);
+			battle(hero, monster,game);
+
+			room.setMonster(null); // Remove the monster after the battle
+			if (!hero.isAlive()) {
+				break;
 			}
 		}
 
@@ -100,7 +104,9 @@ private void move(Dungeon game) {
 		System.out.println("W: Move West");		
 	}
 	if(this.theHero.getVisionPotion() > 0)
-		System.out.println("V: To see your surrondings:  Vision potions Remaining: "+ this.theHero.getVisionPotion());
+		System.out.println("V: To see your surroundings:  Vision potions Remaining: "+ this.theHero.getVisionPotion());
+	
+	System.out.println("?: See all rooms (if you want to cheat)");
 
 	String choice = Keyboard.readString().toUpperCase();
 	if (choice.equals("?")) {
@@ -183,22 +189,13 @@ user has the option of quitting.
 	            else
 	               theMonster.attack(theHero);
 	         }
-	         
-				//let the player bail out if desired only if both are alive
-	         if (theHero.isAlive() && theMonster.isAlive())
-	         do {
-	   			System.out.print("\nContinue battle (y/n): ");
-	   			choice = Character.toLowerCase(Keyboard.readChar());
-	         } while (choice != 'y' && choice != 'n');
 
-		} while  (theHero.isAlive() && theMonster.isAlive() && choice == 'y'); //end battle loop
+		} while  (theHero.isAlive() && theMonster.isAlive()); //end battle loop
 
 		if (!theMonster.isAlive())
 		    System.out.println(theHero.getName() + " was victorious!");
 		else if (!theHero.isAlive())
 			System.out.println(theHero.getName() + " was defeated :-(");
-		else//both are alive so user quit the game
-			System.out.println("Quitters never win ;-)");
 
 	}//end battle method
 

@@ -21,6 +21,7 @@ public class Room
 	private boolean isExit;
 	private String pillarOfOO;
 	private Monster monster;
+	private boolean hasHero; // Used only to print the hero
 
 	
 	// Creates a room specifying the doors.
@@ -68,6 +69,9 @@ public class Room
 	}
 	public boolean isExit() { return this.isExit; }
 	public boolean isEntrance() { return this.isEntrance; }
+	
+	public boolean hasHero() { return this.hasHero; }
+	public void setHasHero(boolean hasHero) {  this.hasHero = hasHero; }
 	
 	// Methods for checking the doors
 	public boolean hasNorthDoor() { return this.hasNorthDoor; }
@@ -136,6 +140,11 @@ public class Room
 	* * *
 	* E |
 	* - *
+	* 
+	* Room where the hero is located
+	/ * \
+	* E |
+	\ - /
 	************************************/
 	@Override
 	public String toString() {
@@ -182,12 +191,21 @@ public class Room
 			roomContent = "M";
 		}
 		
-		if (line == 0)
-			return String.format("*%s*", northDoor);
-		else if (line == 1)
-			return String.format("%s%s%s", westDoor, roomContent, eastDoor);
-		else if (line == 2)
-			return String.format("*%s*", southDoor);
+		if (hasHero) {
+			if (line == 0)
+				return String.format("/%s\\", northDoor);
+			else if (line == 1)
+				return String.format("%s%s%s", westDoor, roomContent, eastDoor);
+			else if (line == 2)
+				return String.format("\\%s/", southDoor);
+		} else {
+			if (line == 0)
+				return String.format("*%s*", northDoor);
+			else if (line == 1)
+				return String.format("%s%s%s", westDoor, roomContent, eastDoor);
+			else if (line == 2)
+				return String.format("*%s*", southDoor);
+		}
 		return "";
 	}
 }
